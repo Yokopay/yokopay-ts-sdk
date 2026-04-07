@@ -1,6 +1,6 @@
 # yokopay
 
-YokoPay TypeScript SDK — type-safe client for deposit and withdrawal APIs with ECDSA signature authentication.
+[YokoPay](https://yokopay.com) TypeScript SDK — type-safe client for deposit and withdrawal APIs with ECDSA signature authentication.
 
 ## Installation
 
