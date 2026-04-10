@@ -149,7 +149,7 @@ WithdrawStatus.UnderReview;  // "under_review"
 | Network | ID |
 |---------|----|
 | Ethereum Mainnet | `1` |
-| BSC Mainnet | `66` |
+| BSC Mainnet | `56` |
 | BSC Testnet | `67` |
 | Sepolia | `11155111` |
 | TRX | `4` |

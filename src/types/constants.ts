@@ -1,6 +1,6 @@
 export const NetworkId = {
   EthereumMainnet: 1,
-  BSCMainnet: 66,
+  BSCMainnet: 56,
   BSCTestnet: 67,
   Sepolia: 11155111,
   TRX: 4,
