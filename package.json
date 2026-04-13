@@ -1,6 +1,6 @@
 {
   "name": "yokopay",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "YokoPay TypeScript SDK - deposit and withdrawal API client with ECDSA signature authentication",
   "type": "module",
   "main": "./dist/index.cjs",

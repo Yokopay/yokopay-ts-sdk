@@ -29,4 +29,8 @@ export type {
   RequestWithdrawalResponse,
   GetWithdrawalsResponse,
 } from "./types/withdrawal.js";
+export type {
+  ConsolidationBalance,
+  GetConsolidationBalancesResponse,
+} from "./types/consolidation.js";
 export type { CallbackData, CallbackPayload } from "./types/callback.js";

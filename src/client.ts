@@ -14,6 +14,7 @@ import type {
   GetWithdrawalsParams,
   GetWithdrawalsResponse,
 } from "./types/withdrawal.js";
+import type { GetConsolidationBalancesResponse } from "./types/consolidation.js";
 import type { CallbackData, CallbackPayload } from "./types/callback.js";
 import {
   signRequest,
@@ -184,6 +185,12 @@ export class YokoPay {
 
     const raw = await this.post<Record<string, unknown>>(path, body);
     return toCamelCase<RequestWithdrawalResponse>(raw);
+  }
+
+  async getConsolidationBalances(): Promise<GetConsolidationBalancesResponse> {
+    const path = `/api/v1/client/project/${this.config.projectId}/consolidation/balances`;
+    const raw = await this.get<Record<string, unknown>>(path);
+    return toCamelCase<GetConsolidationBalancesResponse>(raw);
   }
 
   parseCallbackData(payload: CallbackPayload): CallbackData {

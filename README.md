@@ -106,6 +106,18 @@ const result = await client.requestWithdrawal({
 console.log(result.data.status); // "pending"
 ```
 
+## Consolidation Balances
+
+Get the warm wallet balances of the platform across all networks and tokens.
+
+```typescript
+const result = await client.getConsolidationBalances();
+
+for (const balance of result.data) {
+  console.log(`${balance.networkName} ${balance.tokenName}: ${balance.balanceFloat}`);
+}
+```
+
 ## Callback Verification
 
 YokoPay sends webhook callbacks for deposit/withdrawal events. Verify the platform signature before processing:
