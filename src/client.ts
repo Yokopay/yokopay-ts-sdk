@@ -35,6 +35,7 @@ export class YokoPay {
     if (!config.publicKey) throw new YokoPayError("publicKey is required", 0);
     if (!config.platformPublicKey)
       throw new YokoPayError("platformPublicKey is required", 0);
+    if (!config.apiKey) throw new YokoPayError("apiKey is required", 0);
 
     this.config = {
       ...config,
@@ -72,14 +73,13 @@ export class YokoPay {
     path: string,
     params?: Record<string, string>,
   ): Promise<T> {
-    const signature = this.sign(path, null);
     return request<T>({
       baseUrl: this.config.baseUrl,
       method: "GET",
       path,
       params,
       headers: {
-        "X-Signature": signature,
+        "X-API-Key": this.config.apiKey,
       },
       timeout: this.timeoutMs,
     });
@@ -113,9 +113,14 @@ export class YokoPay {
     if (!params.networkId)
       throw new YokoPayError("networkId is required", 0);
 
-    const path = `/api/v1/client/project/${this.config.projectId}/user/generate-deposit-address`;
+    const prefix = `${this.config.projectId}-`;
+    const uid = params.userUid.startsWith(prefix)
+      ? params.userUid
+      : prefix + params.userUid;
+
+    const path = `/api/v1/client/project/${this.config.projectId}/user/generate-deposit-address-by-user-uid`;
     const body = {
-      user_uid: params.userUid,
+      uid,
       network_id: params.networkId,
     };
 

@@ -12,6 +12,7 @@ function createClient() {
     privateKey: keys.privateKey,
     publicKey: keys.publicKey,
     platformPublicKey: platformKeys.publicKey,
+    apiKey: "test-api-key",
   });
 }
 
@@ -24,6 +25,7 @@ describe("YokoPay constructor", () => {
           privateKey: "x",
           publicKey: "x",
           platformPublicKey: "x",
+          apiKey: "x",
         }),
     ).toThrow("projectId is required");
   });
@@ -113,7 +115,7 @@ describe("API methods send correct requests", () => {
     );
     expect(options.method).toBe("GET");
     expect(options.body).toBeUndefined();
-    expect(options.headers["X-Signature"]).toMatch(/^0x/);
+    expect(options.headers["X-API-Key"]).toBe("test-api-key");
   });
 
   it("requestWithdrawal sends POST with snake_case body", async () => {

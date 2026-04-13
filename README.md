@@ -1,6 +1,6 @@
 # yokopay
 
-[YokoPay](https://yokopay.com) TypeScript SDK — type-safe client for deposit and withdrawal APIs with ECDSA signature authentication.
+[YokoPay](https://yokopay.com) TypeScript SDK — type-safe client for deposit and withdrawal APIs with ECDSA signature and API key authentication.
 
 ## Installation
 
@@ -22,6 +22,7 @@ const client = new YokoPay({
   privateKey: "0x...",
   publicKey: "0x...",
   platformPublicKey: "0x...",
+  apiKey: "your-api-key",
 });
 ```
 
@@ -29,9 +30,10 @@ const client = new YokoPay({
 |-----------|------|----------|-------------|
 | `baseUrl` | `string` | No | API base URL (default: `https://api.yokopay.com`) |
 | `projectId` | `string` | Yes | Project UID from the dashboard |
-| `privateKey` | `string` | Yes | Your ECDSA private key (`0x`-prefixed hex) |
+| `privateKey` | `string` | Yes | Your ECDSA private key (`0x`-prefixed hex) — used to sign POST requests |
 | `publicKey` | `string` | Yes | Your ECDSA public key (`0x`-prefixed, uncompressed 65-byte) |
 | `platformPublicKey` | `string` | Yes | YokoPay platform public key for callback verification |
+| `apiKey` | `string` | Yes | API key for authenticating GET requests (sent as `X-API-Key`) |
 | `timeout` | `number` | No | Request timeout in seconds (default: `30`) |
 
 ## Key Generation
@@ -61,11 +63,11 @@ console.log(result.data.addresses);
 
 ```typescript
 const result = await client.generateDepositAddress({
-  userUid: "PROJECT_UID-user123",
+  userUid: "user123", // project ID is auto-prefixed if missing
   networkId: 11155111,
 });
 
-console.log(result.address);
+console.log(result.data.address);
 ```
 
 ### Get by UID
@@ -73,7 +75,7 @@ console.log(result.address);
 ```typescript
 const result = await client.getDepositAddress("userUid", 11155111);
 
-console.log(result.address);
+console.log(result.data.address);
 ```
 
 ## Deposits & Withdrawals
@@ -101,7 +103,7 @@ const result = await client.requestWithdrawal({
   networkId: 11155111,
 });
 
-console.log(result.status); // "success"
+console.log(result.data.status); // "pending"
 ```
 
 ## Callback Verification

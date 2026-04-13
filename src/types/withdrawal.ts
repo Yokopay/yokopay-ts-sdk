@@ -1,3 +1,5 @@
+import type { ApiResponse } from "./response.js";
+
 export interface RequestWithdrawalParams {
   uid: string;
   assetId: number;
@@ -27,18 +29,12 @@ export interface WithdrawalSummary {
   recordCount: number;
 }
 
-export interface RequestWithdrawalResponse {
-  code: number;
+export type RequestWithdrawalResponse = ApiResponse<{
+  requestUid: string;
   status: string;
-  message: string;
-  data: {
-    requestUid: string;
-    status: string;
-  };
-}
+}>;
 
-export interface GetWithdrawalsResponse {
-  code: number;
+export type GetWithdrawalsResponse = ApiResponse<{
   data: {
     withdraws: WithdrawalRecord[];
     summary: WithdrawalSummary[];
@@ -46,4 +42,4 @@ export interface GetWithdrawalsResponse {
   page: number;
   pageSize: number;
   total: number;
-}
+}>;

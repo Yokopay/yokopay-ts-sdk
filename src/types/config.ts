@@ -4,5 +4,6 @@ export interface YokoPayConfig {
   privateKey: string;
   publicKey: string;
   platformPublicKey: string;
+  apiKey: string;
   timeout?: number;
 }
